@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Explore as ExploreType, Live as LiveType } from "@/types";
 
 import { Explore, Live, Outdoor } from "@/sections";
-import { Header, Banner } from "@/components";
+import { Header, Banner, Footer } from "@/components";
 
 interface Props {
   explores: ExploreType[];
@@ -27,6 +27,8 @@ const Home = ({ explores, lives }: Props) => {
         <Live lives={lives} />
         <Outdoor />
       </main>
+
+      <Footer />
     </div>
   );
 };
