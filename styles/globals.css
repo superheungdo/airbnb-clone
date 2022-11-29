@@ -18,3 +18,22 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input {
+  outline: 0;
+}
+
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .pointer {
+    @apply cursor-pointer;
+  }
+  .ball {
+    @apply rounded-full;
+  }
+  .check {
+    @apply border border-blue-700;
+  }
+}
