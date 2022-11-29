@@ -2,8 +2,8 @@ import Head from "next/head";
 
 import { Explore as ExploreType, Live as LiveType } from "@/types";
 
-import { Explore, Live } from "@/sections";
-import { Header, Banner, Outdoor } from "@/components";
+import { Explore, Live, Outdoor } from "@/sections";
+import { Header, Banner } from "@/components";
 
 interface Props {
   explores: ExploreType[];
