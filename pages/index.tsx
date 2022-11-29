@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { Header } from "@/components";
+import { Header, Banner } from "@/components";
 
 const Home = () => {
   return (
@@ -12,6 +12,7 @@ const Home = () => {
       </Head>
 
       <Header />
+      <Banner />
     </div>
   );
 };
