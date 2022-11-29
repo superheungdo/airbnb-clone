@@ -1,15 +1,16 @@
 import Head from "next/head";
 
-import { Explore as ExploreType } from "@/types";
+import { Explore as ExploreType, Live as LiveType } from "@/types";
 
-import { Explore } from "@/sections";
+import { Explore, Live } from "@/sections";
 import { Header, Banner } from "@/components";
 
 interface Props {
   explores: ExploreType[];
+  lives: LiveType[];
 }
 
-const Home = ({ explores }: Props) => {
+const Home = ({ explores, lives }: Props) => {
   return (
     <div>
       <Head>
@@ -23,6 +24,7 @@ const Home = ({ explores }: Props) => {
 
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <Explore explores={explores} />
+        <Live lives={lives} />
       </main>
     </div>
   );
@@ -35,9 +37,14 @@ export const getStaticProps = async () => {
     (res) => res.json()
   );
 
+  const lives = await fetch("https://www.jsonkeeper.com/b/VHHT").then((res) =>
+    res.json()
+  );
+
   return {
     props: {
       explores,
+      lives,
     },
   };
 };
