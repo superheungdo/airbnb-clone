@@ -36,4 +36,7 @@ input {
   .check {
     @apply border border-blue-700;
   }
+  .header-icon {
+    @apply text-[16px] lg:text-[20px] pointer;
+  }
 }

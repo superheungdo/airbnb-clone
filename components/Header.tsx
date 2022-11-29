@@ -33,13 +33,13 @@ const Header = () => {
       {/* Right */}
       <div className="flex justify-end items-center space-x-2 lg:space-x-4 text-gray-500">
         <div className="flex-center space-x-2 pointer">
-          <p className="hidden md:inline">Become a host</p>
-          <BsGlobe className="text-[20px]" />
+          <p className="hidden md:inline text-sm lg:text-base">Become a host</p>
+          <BsGlobe className="header-icon" />
         </div>
 
         <div className="flex space-x-2 border-2 p-2 ball">
-          <AiOutlineMenu className="text-[20px] pointer" />
-          <FaUserCircle className="text-[20px] pointer" />
+          <AiOutlineMenu className="header-icon" />
+          <FaUserCircle className="header-icon" />
         </div>
       </div>
     </header>
