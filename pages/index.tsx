@@ -1,8 +1,15 @@
 import Head from "next/head";
 
+import { Explore as ExploreType } from "@/types";
+
+import { Explore } from "@/sections";
 import { Header, Banner } from "@/components";
 
-const Home = () => {
+interface Props {
+  explores: ExploreType[];
+}
+
+const Home = ({ explores }: Props) => {
   return (
     <div>
       <Head>
@@ -13,8 +20,24 @@ const Home = () => {
 
       <Header />
       <Banner />
+
+      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+        <Explore explores={explores} />
+      </main>
     </div>
   );
 };
 
 export default Home;
+
+export const getStaticProps = async () => {
+  const explores = await fetch("https://www.jsonkeeper.com/b/4G1G").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      explores,
+    },
+  };
+};
