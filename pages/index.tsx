@@ -25,9 +25,8 @@ const Home = ({ explores, lives }: Props) => {
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <Explore explores={explores} />
         <Live lives={lives} />
+        <Outdoor />
       </main>
-
-      <Outdoor />
     </div>
   );
 };
