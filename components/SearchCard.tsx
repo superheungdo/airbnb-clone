@@ -1,23 +1,25 @@
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 
 import { Search } from "@/types";
 
-const SearchCard = ({
-  img,
-  location,
-  title,
-  description,
-  star,
-  price,
-  total,
-  long,
-  lat,
-}: Search) => {
+interface Props {
+  search: Search;
+  selected: boolean;
+  setSelectedLocation: Dispatch<SetStateAction<Search | null>>;
+}
+
+const SearchCard = ({ search, selected, setSelectedLocation }: Props) => {
+  const { img, location, title, description, star, price, total } = search;
+
   return (
     <div
-      className="flex px-2 pr-4 py-7 border-b pointer hover:opacity-80 hover:shadow-lg
-    transition duration-200 ease-out first:border-t"
+      className={`flex px-2 pr-4 py-7 border-b pointer
+    ${selected && "scale-[1.02] shadow-lg"}
+    transition duration-200 ease-out first:border-t
+    hover:opacity-80 hover:shadow-lg`}
+      onClick={() => setSelectedLocation(search)}
     >
       <div className="relative w-40 md:w-80 h-24 md:h-52 flex-shrink-0">
         <Image

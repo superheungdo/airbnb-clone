@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import MapGL, { Marker, Popup, ViewStateChangeEvent } from "react-map-gl";
 import { getCenter } from "geolib";
 
@@ -6,10 +6,11 @@ import { Search, Map as MapType } from "@/types";
 
 interface Props {
   searchs: Search[];
+  selectedLocation: Search | null;
+  setSelectedLocation: Dispatch<SetStateAction<Search | null>>;
 }
 
-const Map = ({ searchs }: Props) => {
-  const [selectedLocation, setSelectedLocation] = useState<Search | null>(null);
+const Map = ({ searchs, selectedLocation, setSelectedLocation }: Props) => {
   const [viewport, setViewport] = useState<MapType>({
     longitude: -122.4376,
     latitude: 37.7577,
@@ -54,11 +55,7 @@ const Map = ({ searchs }: Props) => {
     >
       {searchs.map((search) => (
         <div key={search.long}>
-          <Marker
-            longitude={search.long}
-            latitude={search.lat}
-            offset={[-20, -10]}
-          >
+          <Marker longitude={search.long} latitude={search.lat}>
             <p
               className="text-2xl pointer animate-bounce"
               role="img"
@@ -73,8 +70,9 @@ const Map = ({ searchs }: Props) => {
             <Popup
               longitude={search.long}
               latitude={search.lat}
-              closeOnClick={true}
+              closeOnClick={false}
               onClose={() => setSelectedLocation(null)}
+              offset={[0, -10]}
             >
               {search.title}
             </Popup>

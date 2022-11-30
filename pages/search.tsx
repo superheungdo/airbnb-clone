@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { Search } from "@/types";
@@ -9,6 +10,8 @@ interface Props {
 
 const Search = ({ searchs }: Props) => {
   const router = useRouter();
+
+  const [selectedLocation, setSelectedLocation] = useState<Search | null>(null);
 
   const { location, guests, startDate, endDate } = router.query;
   const range = `${startDate} - ${endDate}`;
@@ -35,13 +38,22 @@ const Search = ({ searchs }: Props) => {
 
         <div className="flex flex-col">
           {searchs.map((search) => (
-            <SearchCard key={search.img} {...search} />
+            <SearchCard
+              key={search.img}
+              search={search}
+              selected={selectedLocation?.long === search.long}
+              setSelectedLocation={setSelectedLocation}
+            />
           ))}
         </div>
       </section>
 
       <section className="hidden xl:inline-flex xl:min-w-[600px]">
-        <Map searchs={searchs} />
+        <Map
+          searchs={searchs}
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+        />
       </section>
     </main>
   );
