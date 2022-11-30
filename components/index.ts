@@ -4,3 +4,4 @@ export { default as Banner } from "./Banner";
 export { default as ExploreCard } from "./ExploreCard";
 export { default as LiveCard } from "./LiveCard";
 export { default as SearchCard } from "./SearchCard";
+export { default as Map } from "./Map";

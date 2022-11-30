@@ -20,3 +20,9 @@ export interface Search {
   long: number;
   lat: number;
 }
+
+export interface Map {
+  longitude: number;
+  latitude: number;
+  zoom: number;
+}

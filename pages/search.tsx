@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import { Search } from "@/types";
-import { SearchCard } from "@/components";
+import { SearchCard, Map } from "@/components";
 
 interface Props {
   searchs: Search[];
@@ -38,6 +38,10 @@ const Search = ({ searchs }: Props) => {
             <SearchCard key={search.img} {...search} />
           ))}
         </div>
+      </section>
+
+      <section className="hidden xl:inline-flex xl:min-w-[600px]">
+        <Map />
       </section>
     </main>
   );
