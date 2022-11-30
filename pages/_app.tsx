@@ -1,6 +1,8 @@
 import "../styles/globals.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import "mapbox-gl/dist/mapbox-gl.css";
+
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";

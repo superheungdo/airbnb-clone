@@ -41,7 +41,7 @@ const Search = ({ searchs }: Props) => {
       </section>
 
       <section className="hidden xl:inline-flex xl:min-w-[600px]">
-        <Map />
+        <Map searchs={searchs} />
       </section>
     </main>
   );
