@@ -1,10 +1,14 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, KeyboardEvent } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { BsGlobe } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import { DateRangePicker, RangeKeyDict, Range } from "react-date-range";
+import { format } from "date-fns";
+
+import routes from "@/constants/routes";
 
 const initialSelectionRange: Range = {
   startDate: new Date(),
@@ -12,15 +16,21 @@ const initialSelectionRange: Range = {
   key: "selection",
 };
 
+const inputId = "input";
+
+const formatDate = (date: Date) => format(new Date(date), "MMM dd, yyyy");
+
 const Header = () => {
-  const [searchInput, setSearchInput] = useState<string>("");
+  const router = useRouter();
+
+  const [location, setLocation] = useState<string>("");
   const [numOfGuests, setNumOfGuests] = useState<number>(1);
   const [selectionRange, setSelectionRange] = useState<Range>(
     initialSelectionRange
   );
 
-  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) =>
-    setSearchInput(e.target.value);
+  const handleLocation = (e: ChangeEvent<HTMLInputElement>) =>
+    setLocation(e.target.value);
 
   const handleNumOfGuests = (e: ChangeEvent<HTMLInputElement>) =>
     setNumOfGuests(parseInt(e.target.value));
@@ -32,15 +42,46 @@ const Header = () => {
   };
 
   const resetInput = () => {
-    setSearchInput("");
+    setLocation("");
     setNumOfGuests(1);
     setSelectionRange(initialSelectionRange);
+  };
+
+  const handleSearch = () => {
+    if (!location) return;
+
+    const formattedStartDate = formatDate(selectionRange.startDate as Date);
+    const formattedEndDate = formatDate(selectionRange.endDate as Date);
+
+    router.push({
+      pathname: routes.search,
+      query: {
+        location,
+        guests: numOfGuests,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      },
+    });
+
+    resetInput();
+  };
+
+  const detectEnter = (e: KeyboardEvent) => {
+    if (location && e.key === "Enter") {
+      const inputElement = document.getElementById(inputId);
+      inputElement?.blur();
+
+      handleSearch();
+    }
   };
 
   return (
     <header className="sticky top-0 grid grid-cols-3 bg-white shadow-md p-5 md:px-10 z-50">
       {/* Left */}
-      <div className="relative flex items-center h-7 lg:h-10 my-auto pointer">
+      <div
+        className="relative flex items-center w-[85%] md:w-[40%] xl:w-[30%] 2xl:w-[25%] h-7 lg:h-10 my-auto pointer"
+        onClick={() => router.push(routes.home)}
+      >
         <Image
           src="https://links.papareact.com/qd3"
           alt="logo"
@@ -55,14 +96,19 @@ const Header = () => {
       md:shadow-sm"
       >
         <input
+          id={inputId}
           className="w-full text-center md:text-left md:pr-5 text-sm
-          text-gray-600 placeholder-gray-400"
+          text-gray-600 placeholder-gray-400 capitalize"
           type="text"
-          value={searchInput}
-          onChange={handleSearchInput}
-          placeholder="Start your search"
+          value={location}
+          onChange={handleLocation}
+          placeholder="Where you want to go"
+          onKeyUp={detectEnter}
         />
-        <AiOutlineSearch className="hidden md:inline-flex flex-shrink-0 bg-primary text-white text-[32px] p-2 ball pointer" />
+        <AiOutlineSearch
+          className="hidden md:inline-flex flex-shrink-0 bg-primary text-white text-[32px] p-2 ball pointer"
+          onClick={handleSearch}
+        />
       </div>
 
       {/* Right */}
@@ -79,7 +125,7 @@ const Header = () => {
       </div>
 
       {/* Date & Guests */}
-      {searchInput && (
+      {location && (
         <div className="flex flex-col col-span-3 mx-auto">
           <DateRangePicker
             ranges={[selectionRange]}
@@ -107,7 +153,9 @@ const Header = () => {
             <button className="flex-grow text-gray-500" onClick={resetInput}>
               Cancel
             </button>
-            <button className="flex-grow text-primary">Search</button>
+            <button className="flex-grow text-primary" onClick={handleSearch}>
+              Search
+            </button>
           </div>
         </div>
       )}

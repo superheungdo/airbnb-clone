@@ -39,4 +39,8 @@ input {
   .header-icon {
     @apply text-[16px] lg:text-[20px] pointer;
   }
+  .search-option {
+    @apply px-4 py-2 border ball pointer hover:shadow-lg transition transform
+           active:scale-95 active:bg-gray-100 duration-100 ease-out;
+  }
 }

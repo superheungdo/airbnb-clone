@@ -8,3 +8,15 @@ export interface Live {
   img: string;
   title: string;
 }
+
+export interface Search {
+  img: string;
+  location: string;
+  title: string;
+  description: string;
+  star: number;
+  price: string;
+  total: string;
+  long: number;
+  lat: number;
+}

@@ -1,9 +1,7 @@
-import Head from "next/head";
-
 import { Explore as ExploreType, Live as LiveType } from "@/types";
 
 import { Explore, Live, Outdoor } from "@/sections";
-import { Header, Banner, Footer } from "@/components";
+import { Banner } from "@/components";
 
 interface Props {
   explores: ExploreType[];
@@ -12,14 +10,7 @@ interface Props {
 
 const Home = ({ explores, lives }: Props) => {
   return (
-    <div>
-      <Head>
-        <title>Airbnb</title>
-        <meta name="description" content="This is airbnb website" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
+    <>
       <Banner />
 
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
@@ -27,9 +18,7 @@ const Home = ({ explores, lives }: Props) => {
         <Live lives={lives} />
         <Outdoor />
       </main>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
