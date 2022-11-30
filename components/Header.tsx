@@ -8,7 +8,7 @@ import { HiUsers } from "react-icons/hi";
 import { DateRangePicker, RangeKeyDict, Range } from "react-date-range";
 import { format } from "date-fns";
 
-import routes from "@/constants/routes";
+import { routes, colors } from "@/constants";
 
 const initialSelectionRange: Range = {
   startDate: new Date(),
@@ -131,7 +131,7 @@ const Header = () => {
             ranges={[selectionRange]}
             onChange={handleSelect}
             minDate={new Date()}
-            rangeColors={["#FD5861"]}
+            rangeColors={[colors.primary]}
           />
 
           <div className="flex items-center border-b mb-4">
